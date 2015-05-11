@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<head>
+<title>Four on the Floor</title>
+<meta charset=”UTF-8″>
+<link rel="stylesheet" href="css/drummodule.css">
+</head>
+
+<body>
+<div class="col-md-3">
+            <button type="button" id="playBtn" class="btn"> Play</button>
+			<button type="button" id="stopBtn" class="btn"> Stop</button>
+        </div>
+		
+        <div class="instrument">
+            <label class="col-md-2">Hi-Hat:</label>
+            <div class="col-md-10">
+                        <button id="hiHat0" type="button" class="btn-blink"></button>
+                        <button id="hiHat1" type="button" class="btn-blink"></button>
+                        <button id="hiHat2" type="button" class="btn-blink"></button>
+                        <button id="hiHat3" type="button" class="btn-blink"></button>
+                        <button id="hiHat4" type="button" class="btn-blink"></button>
+                        <button id="hiHat5" type="button" class="btn-blink"></button>
+                        <button id="hiHat6" type="button" class="btn-blink"></button>
+                        <button id="hiHat7" type="button" class="btn-blink"></button>
+                        <button id="hiHat8" type="button" class="btn-blink"></button>
+                        <button id="hiHat9" type="button" class="btn-blink"></button>
+                        <button id="hiHat10" type="button" class="btn-blink"></button>
+                        <button id="hiHat11" type="button" class="btn-blink"></button>
+                        <button id="hiHat12" type="button" class="btn-blink"></button>
+                        <button id="hiHat13" type="button" class="btn-blink"></button>
+						<button id="hiHat14" type="button" class="btn-blink"></button>
+						<button id="hiHat15" type="button" class="btn-blink"></button>
+            </div>
+        </div>
+        <div class="instrument">
+            <label class="col-md-2">Snare:</label>
+            <div class="col-md-10">
+                        <button id="snareDrum0" type="button" class="btn-blink"></button>
+                        <button id="snareDrum1" type="button" class="btn-blink"></button>
+                        <button id="snareDrum2" type="button" class="btn-blink"></button>
+                        <button id="snareDrum3" type="button" class="btn-blink"></button>
+                        <button id="snareDrum4" type="button" class="btn-blink"></button>
+                        <button id="snareDrum5" type="button" class="btn-blink"></button>
+                        <button id="snareDrum6" type="button" class="btn-blink"></button>
+                        <button id="snareDrum7" type="button" class="btn-blink"></button>
+                        <button id="snareDrum8" type="button" class="btn-blink"></button>
+                        <button id="snareDrum9" type="button" class="btn-blink"></button>
+                        <button id="snareDrum10" type="button" class="btn-blink"></button>
+                        <button id="snareDrum11" type="button" class="btn-blink"></button>
+                        <button id="snareDrum12" type="button" class="btn-blink"></button>
+                        <button id="snareDrum13" type="button" class="btn-blink"></button>
+                        <button id="snareDrum14" type="button" class="btn-blink"></button>
+						<button id="snareDrum15" type="button" class="btn-blink"></button>
+            </div>
+        </div>
+        <div class="instrument">
+            <label class="col-md-2">Bass:</label>
+            <div class="col-md-10">
+                    <button id="bassDrum0" type="button" class="btn-blink"></button>
+                        <button id="bassDrum1" type="button" class="btn-blink"></button>
+                        <button id="bassDrum2" type="button" class="btn-blink"></button>
+                        <button id="bassDrum3" type="button" class="btn-blink"></button>
+                        <button id="bassDrum4" type="button" class="btn-blink"></button>
+                        <button id="bassDrum5" type="button" class="btn-blink"></button>
+                        <button id="bassDrum6" type="button" class="btn-blink"></button>
+                        <button id="bassDrum7" type="button" class="btn-blink"></button>
+                        <button id="bassDrum8" type="button" class="btn-blink"></button>
+                        <button id="bassDrum9" type="button" class="btn-blink"></button>
+                        <button id="bassDrum10" type="button" class="btn-blink"></button>
+                        <button id="bassDrum11" type="button" class="btn-blink"></button>
+                        <button id="bassDrum12" type="button" class="btn-blink"></button>
+                        <button id="bassDrum13" type="button" class="btn-blink"></button>
+                        <button id="bassDrum14" type="button" class="btn-blink"></button>
+                        <button id="bassDrum15" type="button" class="btn-blink"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<audio id="hiHatTag" src="audio/HiHat.mp3" preload="auto"></audio>
+<audio id="snareTag" src="audio/SnareHighPitch.mp3" preload="auto"></audio>
+<audio id="bassTag" src="audio/Bass.mp3" preload="auto"></audio>
+
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$("#playBtn").on("click", fourOnFloor);
+	$("#stopBtn").on("click", stopPlayback);
+});
+
+var stopSong = false;
+$('#stopBtn').prop('disabled', true);
+  
+		function stopPlayback() {
+			stopSong = true;
+			$('#playBtn').prop('disabled', false);
+			$('#stopBtn').prop('disabled', true);
+		}
+		
+		function fourOnFloor () {
+			$('#stopBtn').prop('disabled', false);
+			$('#playBtn').prop('disabled', true);
+			
+			var numMeasures = 8;
+			var measureCounter = 0;
+            var i = 0;
+			stopSong = false;
+
+			hiHat = [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+            snare = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+            bass = [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0];
+            
+            var j = setInterval(function(){
+				if(stopSong){
+					clearInterval(j);
+				}
+				
+				var hiHatPlay = (hiHat[i]);
+				var hiHatId = "#hiHat" + [i];
+				if((hiHat[i]) == 1){
+					$(hiHatId).css({"background": "yellow"});
+					var blinky = setTimeout(function(){
+					$(hiHatId).css({"background": "#091117"});
+					},250)
+					document.getElementById('hiHatTag').play();  //the play function does not exist in jQuery
+				}
+				
+				var snarePlay = (snare[i]);
+				var snareId = "#snareDrum" + [i];
+				if((snare[i]) == 1){
+					$(snareId).css({"background": "yellow"});
+					var blinky = setTimeout(function(){
+					$(snareId).css({"background": "#091117"});
+					},250)
+					document.getElementById('snareTag').play();
+				}
+
+				var bassPlay = (bass[i]);
+				var bassId = "#bassDrum" + [i];
+				if((bass[i]) == 1){
+					$(bassId).css({"background": "yellow"});
+					var blinky = setTimeout(function(){
+					$(bassId).css({"background": "#091117"});
+					},250)
+					document.getElementById('bassTag').play();
+				}
+				
+                i++;
+                                
+                if(i == hiHat.length) {
+					i = 0;
+					measureCounter++;
+				
+					if(measureCounter == numMeasures) {
+					clearInterval(j);
+					clearTimeout(blinky);
+					$('#playBtn').prop('disabled', false);
+					}
+                }
+            }, 125);
+        }
+		</script>
+	</body>
+</html>
